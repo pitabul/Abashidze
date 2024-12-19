@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -100,8 +101,17 @@
       } else if (buttonValue === '←') {
         currentInput = currentInput.slice(0, -1) || '0';
       } else if (buttonValue === '=') {
-        currentInput = eval(memory + currentOperator + currentInput).toString();
-        currentOperator = '';
+        try {
+          const result = eval(memory + currentOperator + currentInput);
+          if (!isFinite(result)) {
+            throw new Error("Деление на ноль!");
+          }
+          currentInput = result.toString();
+          currentOperator = '';
+        } catch (error) {
+          currentInput = "Ошибка: " + error.message;
+          currentOperator = '';
+        }
       } else if (['+', '-', '*', '/'].includes(buttonValue)) {
         memory = parseFloat(currentInput);
         currentOperator = buttonValue;
