@@ -275,3 +275,4 @@ div{
         display: block;
     }
 }
+.block-1, .block-2, .block-3 { min-height: 100px; display: flex; align-items: center; justify-content: center; }
